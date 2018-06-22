@@ -98,36 +98,47 @@
                     <tbody>
                       <tr>
                         <td>
-                          <div class="inp">
-                            <label class="inp-label">{{ 'web.passengersInfo.label.lastName' | aliasStatic}}</label>
+                          <div class="inp inp-animate-outer">
                             <error-message control="vm.passengerForms[passengerNumber].lastName" format-alias="( (passenger.documentType == 'PSP') ? 'web.messages.pspFormatName' : 'web.messages.format') " touched="vm.submitTouched">
                             </error-message>
-                            <input type="text" name="lastName" ng-model="passenger.lastName" ng-blur="vm.lastNameBlurHandler(passengerNumber)" required ng-pattern=" (passenger.documentType == 'PSP') ? vm.passengerLastNameLatRegexp : vm.passengersCheck.passengerLastNameRegexp " class="textInp"
+                            <input type="text" name="lastName" ng-model="passenger.lastName" ng-blur="vm.lastNameBlurHandler(passengerNumber)" required ng-pattern=" (passenger.documentType == 'PSP') ? vm.passengerLastNameLatRegexp : vm.passengersCheck.passengerLastNameRegexp " class="textInp inp-animate-placeholder"
                               error-highlight="{{vm.submitTouched}}" placeholder="{{ 'web.passengersInfo.lastName' | aliasStatic}}" prevent-browser-suggestions/>
+                            <label class="inp-animate-label">
+                              <span>
+                                {{ 'web.passengersInfo.lastName' | aliasStatic}}
+                              </span>
+                            </label>
                           </div>
                         </td>
                         <td>
-                          <div class="inp">
-                            <label class="inp-label">{{ 'web.passengersInfo.label.firstName' | aliasStatic}}</label>
+                          <div class="inp inp-animate-outer">
                             <error-message control="vm.passengerForms[passengerNumber].firstName" format-alias="( (passenger.documentType == 'PSP') ? 'web.messages.pspFormatName' : 'web.messages.format') " touched="vm.submitTouched">
                             </error-message>
                             <input type="text" name="firstName" ng-model="passenger.firstName" ng-blur="vm.firstNameBlurHandler(passengerNumber)" required ng-pattern=" (passenger.documentType == 'PSP') ? vm.passengerFirstNameLatRegexp : vm.passengersCheck.passengerFirstNameRegexp "
-                              class="textInp" error-highlight="{{vm.submitTouched}}" placeholder="{{ 'web.passengersInfo.firstName' | aliasStatic}}" prevent-browser-suggestions/>
+                              class="textInp inp-animate-placeholder" error-highlight="{{vm.submitTouched}}" placeholder="{{ 'web.passengersInfo.firstName' | aliasStatic}}" prevent-browser-suggestions/>
+                            <label class="inp-animate-label">
+                              <span>
+                                {{ 'web.passengersInfo.firstName' | aliasStatic}}
+                              </span>
+                            </label>
                           </div>
                         </td>
                         <td>
-                          <div class="inp">
-                            <label class="inp-label">{{ 'web.passengersInfo.label.dateOfBirth' | aliasStatic}}</label>
+                          <div class="inp inp-animate-outer">
                             <error-message control="vm.passengerForms[passengerNumber].dateOfBirth" touched="vm.submitTouched">
                             </error-message>
                             <input type="text" name="dateOfBirth" ng-model="passenger.dateOfBirth" required check-date-format check-date-range data-min-date="{{ vm.rangeBirthByPassenger[passengerNumber].from }}" data-max-date="{{ vm.rangeBirthByPassenger[passengerNumber].to }}"
-                              class="textInp" error-highlight="{{vm.submitTouched}}" ui-mask="99.99.9999" model-view-value="true" ui-mask-placeholder="{{ 'web.datePattern' | aliasStatic}}" placeholder="{{ 'web.passengersInfo.dateOfBirth' | aliasStatic}}"
+                              class="textInp inp-animate-placeholder" error-highlight="{{vm.submitTouched}}" ui-mask="99.99.9999" model-view-value="true" ui-mask-placeholder="{{ 'web.datePattern' | aliasStatic}}" placeholder="{{ 'web.passengersInfo.dateOfBirth' | aliasStatic}}"
                               prevent-browser-suggestions/>
+                            <label class="inp-animate-label">
+                              <span>
+                                {{ 'web.passengersInfo.dateOfBirth' | aliasStatic}}
+                              </span>
+                            </label>
                           </div>
                         </td>
                         <td>
-                          <div class="inp">
-                            <label class="inp-label">{{ 'web.passengersInfo.label.gender' | aliasStatic}}</label>
+                          <div class="inp inp-animate-outer">
                             <error-message control="vm.passengerForms[passengerNumber].gender" touched="vm.submitTouched">
                             </error-message>
                             <ui-select ng-model="passenger.gender" theme="selectize" name="gender" search-enabled="false" error-highlight="{{vm.submitTouched}}" ui-select-custom class="ui-select-custom ui-select-passengers" required>
@@ -138,13 +149,17 @@
                                 <div ng-bind-html="gender.name"></div>
                               </ui-select-choices>
                             </ui-select>
+                            <label class="inp-label inp-animate-label">
+                              <span>
+                                {{ 'web.passengersInfo.gender' | aliasStatic}}
+                              </span>
+                            </label>
                           </div>
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <div class="inp">
-                            <label class="inp-label">{{ 'web.passengersInfo.label.nationality' | aliasStatic}}</label>
+                          <div class="inp inp-animate-outer">
                             <error-message control="vm.passengerForms[passengerNumber].nationality" touched="vm.submitTouched">
                             </error-message>
                             <ui-select ng-model="passenger.nationality" theme="selectize" name="nationality" search-enabled="{{ !vm.isMobile }}" skip-focusser="true" ng-change="vm.nationalityChangeHandler(passengerNumber)" error-highlight="{{vm.submitTouched}}" ui-select-custom
@@ -156,11 +171,15 @@
                                 <div ng-bind-html="country[vm.localNamePropName]"></div>
                               </ui-select-choices>
                             </ui-select>
+                            <label class="inp-animate-label">
+                              <span>
+                                {{ 'web.passengersInfo.nationality' | aliasStatic}}
+                              </span>
+                            </label>
                           </div>
                         </td>
                         <td>
-                          <div class="inp">
-                            <label class="inp-label">{{ 'web.passengersInfo.label.documentType' | aliasStatic}}</label>
+                          <div class="inp inp-animate-outer">
                             <error-message control="vm.passengerForms[passengerNumber].documentType" touched="vm.submitTouched">
                             </error-message>
                             <ui-select ng-model="passenger.documentType" name="documentType" theme="selectize" search-enabled="false" ng-change="vm.documentTypeChangeHandler(passengerNumber)" class="ui-select-custom ui-select-passengers" ui-select-custom error-highlight="{{vm.submitTouched}}"
@@ -172,34 +191,46 @@
                                 <div class="{{ 'documentTypeOption_' + doc.code }}" ng-bind-html="doc.name"></div>
                               </ui-select-choices>
                             </ui-select>
+                            <label class="inp-animate-label">
+                              <span>
+                                {{ 'web.passengersInfo.documentType' | aliasStatic}}
+                              </span>
+                            </label>
                           </div>
                         </td>
 
                         <td>
-                          <div class="inp">
-                            <label class="inp-label">{{ 'web.passengersInfo.label.documentNumber' | aliasStatic}}</label>
+                          <div class="inp inp-animate-outer">
                             <error-message control="vm.passengerForms[passengerNumber].documentNumber" touched="vm.submitTouched">
                             </error-message>
                             <info-message ng-if="passenger.documentType && vm.hasAlias('web.messages.formatDocumentNumber.' + passenger.documentType)" touched="vm.submitTouched" control="vm.passengerForms[passengerNumber].documentNumber" format-alias="'web.messages.formatDocumentNumber.' + passenger.documentType">
                             </info-message>
-                            <input type="text" name="documentNumber" ng-model="passenger.documentNumber" required clean-document-number ng-pattern="vm.documentNumberRegexByPassenger[passengerNumber]" class="textInp" error-highlight="{{vm.submitTouched}}" placeholder="{{ 'web.passengersInfo.documentNumber' | aliasStatic}}"
+                            <input type="text" name="documentNumber" ng-model="passenger.documentNumber" required clean-document-number ng-pattern="vm.documentNumberRegexByPassenger[passengerNumber]" class="textInp inp-animate-placeholder" error-highlight="{{vm.submitTouched}}" placeholder="{{ 'web.passengersInfo.documentNumber' | aliasStatic}}"
                               prevent-browser-suggestions/>
+                            <label class="inp-animate-label">
+                              <span>
+                                {{ 'web.passengersInfo.documentNumber' | aliasStatic}}
+                              </span>
+                            </label>
                           </div>
                         </td>
                         <td>
-                          <div class="inp" ng-if="vm.getExpiryByDocType(passenger.documentType, passenger.categoryCode)">
-                            <label class="inp-label">{{ 'web.passengersInfo.label.documentDate' | aliasStatic}}</label>
+                          <div class="inp inp-animate-outer" ng-if="vm.getExpiryByDocType(passenger.documentType, passenger.categoryCode)">
                             <error-message control="vm.passengerForms[passengerNumber].documentDate" touched="vm.submitTouched">
                             </error-message>
-                            <input type="text" name="documentDate" ng-model="passenger.documentDate" required check-date-format check-date-range data-min-date="{{ vm.getExpiryByDocType(passenger.documentType, passenger.categoryCode) }}" class="textInp" error-highlight="{{vm.submitTouched}}"
+                            <input type="text" name="documentDate" ng-model="passenger.documentDate" required check-date-format check-date-range data-min-date="{{ vm.getExpiryByDocType(passenger.documentType, passenger.categoryCode) }}" class="textInp inp-animate-placeholder" error-highlight="{{vm.submitTouched}}"
                               ui-mask="99.99.9999" model-view-value="true" placeholder="{{ 'web.passengersInfo.documentDate' | aliasStatic}}" ui-mask-placeholder="{{ 'web.datePattern' | aliasStatic}}" prevent-browser-suggestions/>
+                            <label class="inp-animate-label">
+                              <span>
+                                {{ 'web.passengersInfo.documentDate' | aliasStatic}}
+                              </span>
+                            </label>
                           </div>
                         </td>
                       </tr>
                       <tr ng-if="vm.passengersRulesByNum[passengerNumber].additionalDocuments">
                         <td>
-                          <div class="inp">
-                            <label class="inp-label">{{ 'web.passengersInfo.label.additionalDocumentType' | aliasStatic}}</label>
+                          <div class="inp inp-animate-outer">
                             <error-message control="vm.passengerForms[passengerNumber].additionalDocumentType" touched="vm.submitTouched">
                             </error-message>
                             <ui-select ng-model="passenger.additionalDocumentType" name="additionalDocumentType" theme="selectize" search-enabled="false" class="ui-select-custom ui-select-passengers" ui-select-custom error-highlight="{{vm.submitTouched}}" required>
@@ -210,15 +241,24 @@
                                 <div class="{{ 'documentTypeOption_' + doc.code }}" ng-bind-html="doc.name"></div>
                               </ui-select-choices>
                             </ui-select>
+                            <label class="inp-animate-label">
+                              <span>
+                                {{ 'web.passengersInfo.additionalDocumentType' | aliasStatic}}
+                              </span>
+                            </label>
                           </div>
                         </td>
 
                         <td>
-                          <div class="inp">
-                            <label class="inp-label">{{ 'web.passengersInfo.label.additionalDocumentNumber' | aliasStatic}}</label>
+                          <div class="inp inp-animate-outer">
                             <error-message control="vm.passengerForms[passengerNumber].additionalDocumentNumber" touched="vm.submitTouched">
                             </error-message>
-                            <input type="text" name="additionalDocumentNumber" ng-model="passenger.additionalDocumentNumber" required class="textInp" error-highlight="{{vm.submitTouched}}" placeholder="{{ 'web.passengersInfo.additionalDocumentNumber' | aliasStatic}}" prevent-browser-suggestions/>
+                            <input type="text" name="additionalDocumentNumber" ng-model="passenger.additionalDocumentNumber" required class="textInp inp-animate-placeholder" error-highlight="{{vm.submitTouched}}" placeholder="{{ 'web.passengersInfo.additionalDocumentNumber' | aliasStatic}}" prevent-browser-suggestions/>
+                            <label class="inp-animate-label">
+                              <span>
+                                {{ 'web.passengersInfo.additionalDocumentNumber' | aliasStatic}}
+                              </span>
+                            </label>
                           </div>
                         </td>
                         <td class="mobileHide"></td>
@@ -226,21 +266,27 @@
                       </tr>
                       <tr ng-if="(passenger.categoryCode == 'AAA' || passenger.categoryCode == 'CPA' || passenger.categoryCode == 'MLA') && (vm.passengersCheck.allowEmail || vm.passengersCheck.allowPhone)">
                         <td>
-                          <div class="inp" ng-if="vm.passengersCheck.allowPhone">
-                            <label class="inp-label">{{ 'web.passengersInfo.label.phone' | aliasStatic}}</label>
+                          <div class="inp inp-animate-outer" ng-if="vm.passengersCheck.allowPhone">
                             <error-message control="vm.passengerForms[passengerNumber].phone" format-alias="'web.messages.formatPhone'" touched="vm.submitTouched">
                             </error-message>
-                            <input type="tel" name="phone" ng-model="passenger.phone" ng-blur="vm.phoneBlurHandler(passengerNumber)" phone-mask ng-required="vm.passengersCheck.requirePhone" ng-pattern="'customer.phoneRegexp' | param" class="textInp" error-highlight="{{vm.submitTouched}}"
+                            <input type="tel" name="phone" ng-model="passenger.phone" ng-blur="vm.phoneBlurHandler(passengerNumber)" phone-mask ng-required="vm.passengersCheck.requirePhone" ng-pattern="'customer.phoneRegexp' | param" class="textInp inp-animate-placeholder" error-highlight="{{vm.submitTouched}}"
                               placeholder="{{ 'web.passengersInfo.phone' | aliasStatic}}" prevent-browser-suggestions/>
+                            <label class="inp-animate-label">
+                              <span>
+                                {{ 'web.passengersInfo.phone' | aliasStatic}}
+                              </span>
+                            </label>
                           </div>
                         </td>
                         <td>
-                          <div class="inp" ng-if="vm.passengersCheck.allowEmail">
-                            <label class="inp-label">{{ 'web.passengersInfo.label.email' | aliasStatic}}</label>
+                          <div class="inp inp-animate-outer" ng-if="vm.passengersCheck.allowEmail">
                             <error-message control="vm.passengerForms[passengerNumber].email" touched="vm.submitTouched">
                             </error-message>
-                            <input type="email" name="email" ng-model="passenger.email" ng-blur="vm.emailBlurHandler(passengerNumber)" ng-required="vm.passengersCheck.requireEmail" ng-pattern="vm.passengersCheck.emailRegex" class="textInp" error-highlight="{{vm.submitTouched}}"
+                            <input type="email" name="email" ng-model="passenger.email" ng-blur="vm.emailBlurHandler(passengerNumber)" ng-required="vm.passengersCheck.requireEmail" ng-pattern="vm.passengersCheck.emailRegex" class="textInp inp-animate-placeholder" error-highlight="{{vm.submitTouched}}"
                               placeholder="{{ 'web.passengersInfo.email' | aliasStatic}}" prevent-browser-suggestions/>
+                            <label class="inp-animate-label">
+                              <span>{{ 'web.passengersInfo.email' | aliasStatic}}</span>
+                            </label>
                           </div>
                         </td>
                         <td class="mobileHide"></td>
@@ -285,35 +331,54 @@
                     <tbody>
                       <tr>
                         <td>
-                          <div class="inp">
+                          <div class="inp inp-animate-outer">
                             <error-message control="vm.customerForm.lastName" touched="vm.submitTouched">
                             </error-message>
-                            <input type="text" name="lastName" ng-model="vm.customer.lastName" required ng-pattern="'customer.lastNameRegexp' | param" class="textInp" error-highlight="{{vm.submitTouched}}" placeholder="{{ 'web.customerInfo.lastName' | aliasStatic}}" prevent-browser-suggestions/>
+                            <input type="text" name="lastName" ng-model="vm.customer.lastName" required ng-pattern="'customer.lastNameRegexp' | param" class="textInp inp-animate-placeholder" error-highlight="{{vm.submitTouched}}" placeholder="{{ 'web.customerInfo.lastName' | aliasStatic}}" prevent-browser-suggestions/>
+                            <label class="inp-animate-label">
+                              <span>
+                                {{ 'web.passengersInfo.lastName' | aliasStatic}}
+                              </span>
+                            </label>
                           </div>
                         </td>
-
                         <td>
-                          <div class="inp">
+                          <div class="inp inp-animate-outer">
                             <error-message control="vm.customerForm.firstName" touched="vm.submitTouched">
                             </error-message>
-                            <input type="text" name="firstName" ng-model="vm.customer.firstName" required ng-pattern="'customer.firstNameRegexp' | param" class="textInp" error-highlight="{{vm.submitTouched}}" placeholder="{{ 'web.customerInfo.firstName' | aliasStatic}}" prevent-browser-suggestions/>
+                            <input type="text" name="firstName" ng-model="vm.customer.firstName" required ng-pattern="'customer.firstNameRegexp' | param" class="textInp inp-animate-placeholder" error-highlight="{{vm.submitTouched}}" placeholder="{{ 'web.customerInfo.firstName' | aliasStatic}}" prevent-browser-suggestions/>
+                            <label class="inp-animate-label">
+                              <span>
+                                {{ 'web.passengersInfo.firstName' | aliasStatic}}
+                              </span>
+                            </label>
                           </div>
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <div class="inp">
+                          <div class="inp inp-animate-outer">
                             <error-message control="vm.customerForm.phone" format-alias="'web.messages.formatPhone'" touched="vm.submitTouched">
                             </error-message>
-                            <input type="tel" name="phone" ng-model="vm.customer.phone" phone-mask ng-pattern="'customer.phoneRegexp' | param" required class="textInp" error-highlight="{{vm.submitTouched}}" placeholder="{{ 'web.customerInfo.phone' | aliasStatic}}" prevent-browser-suggestions/>
+                            <input type="tel" name="phone" ng-model="vm.customer.phone" phone-mask ng-pattern="'customer.phoneRegexp' | param" required class="textInp inp-animate-placeholder" error-highlight="{{vm.submitTouched}}" placeholder="{{ 'web.customerInfo.phone' | aliasStatic}}" prevent-browser-suggestions/>
+                            <label class="inp-animate-label">
+                              <span>
+                                {{ 'web.passengersInfo.phone' | aliasStatic}}
+                              </span>
+                            </label>
                           </div>
                         </td>
                         <td>
-                          <div class="inp">
+                          <div class="inp inp-animate-outer">
                             <error-message control="vm.customerForm.email" touched="vm.submitTouched">
                             </error-message>
-                            <input type="email" name="email" ng-model="vm.customer.email" required ng-pattern="'site.emailRegexp' | param" ng-change="vm.checkLogin()" class="textInp" error-highlight="{{vm.submitTouched}}" placeholder="{{ 'web.customerInfo.email' | aliasStatic}}"
+                            <input type="email" name="email" ng-model="vm.customer.email" required ng-pattern="'site.emailRegexp' | param" ng-change="vm.checkLogin()" class="textInp inp-animate-placeholder" error-highlight="{{vm.submitTouched}}" placeholder="{{ 'web.customerInfo.email' | aliasStatic}}"
                               prevent-browser-suggestions/>
+                              <label class="inp-animate-label">
+                                <span>
+                                  {{ 'web.passengersInfo.email' | aliasStatic}}
+                                </span>
+                              </label>
                           </div>
                         </td>
                       </tr>
