@@ -1,6 +1,7 @@
-<div class="timeTable" >
+<div class="timeTable" hide-not-available-flights
+     flights="vm.scheduleFlights"
+     week-dates="vm.currentWeekDates">
 
-    <h1>hello</h1>
     <div class="table-list">
         <div class="wrap-table">
             <div class="table-head">
@@ -78,25 +79,11 @@
                 </tbody>
 
 
-                <div ng-repeat="(scheduleRowNum, scheduleRow) in vm.scheduleFlights">
-
-                    <div ng-repeat="(flightNum, flight) in scheduleRow.flights"
-                         ng-class="{ 'no-border': scheduleRow.flights.length > 1 && flightNum < (scheduleRow.flights.length-1) }">
-                        <!--<div ng-repeat="(weekDayNum, currentWeekDate) in vm.currentWeekDates">-->
-                        <!--<p>weekDayNum: {{ weekDayNum }}</p>-->
-                        <!--<p>currentWeekDate: {{ currentWeekDate }}</p>-->
-                        <!--<p>available: {{ vm.checkActiveFlightDay(flight.days, weekDayNum, currentWeekDate.date,-->
-                        <!--flight.begin_date, flight.end_date)}}-->
-                        <!--</p>-->
-                        <!--</div>-->
-                    </div>
-                    {{ scheduleRow.flights | availabilityArray:vm.currentWeekDates }}
-                </div>
-
                 <tbody ng-repeat="(scheduleRowNum, scheduleRow) in vm.scheduleFlights">
 
                 <tr ng-repeat-start="(flightNum, flight) in scheduleRow.flights"
-                    ng-class="{ 'no-border': scheduleRow.flights.length > 1 && flightNum < (scheduleRow.flights.length-1) }">
+                    ng-class="{ 'no-border': scheduleRow.flights.length > 1 && flightNum < (scheduleRow.flights.length-1) }"
+                    ng-if="flight.isAvailableAtThisWeek">
 
                     <td>
                         <a href fancybox="popupFlightDetail" ng-click="vm.flightDetail = scheduleRow" class="cell link">{{
@@ -187,8 +174,7 @@
 
             <table class="table-mob" ng-repeat="(scheduleRowNum, scheduleRow) in vm.scheduleFlights"
                    ng-class="{ 'multi-line': (scheduleRow.flights.length > 1) }">
-                <tbody ng-repeat="(flightNum, flight) in scheduleRow.flights">
-
+                <tbody ng-if="flight.isAvailableAtThisWeek" ng-repeat="(flightNum, flight) in scheduleRow.flights">
                 <tr>
                     <th colspan="2">
                         <a href fancybox="popupFlightDetail" ng-click="vm.flightDetail = scheduleRow" class="cell link">{{
