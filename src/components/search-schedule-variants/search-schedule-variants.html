@@ -1,0 +1,266 @@
+<div class="timeTable" >
+
+    <h1>hello</h1>
+    <div class="table-list">
+        <div class="wrap-table">
+            <div class="table-head">
+
+                <div class="table-head-l">
+                    <h2 class="title">
+                        {{ 'web.searchScheduleResult.flightSelect' | aliasStatic}}
+                    </h2>
+                    <a href>
+                        <geo-marker-wrapper prefix="flightWay__point_origin" key="search-schedule-variants"
+                                            cityinfo="vm.searchParams.departure"></geo-marker-wrapper>
+                        <i class="icon_wayArrow"></i>
+                        <geo-marker-wrapper prefix="flightWay__point_destination" key="search-schedule-variants"
+                                            cityinfo="vm.searchParams.arrival"></geo-marker-wrapper>
+                    </a>
+                </div>
+
+                <div class="table-head-r">
+                    <a class="btn-prev" href ng-click="vm.gotoPrevWeek()"
+                       ng-class="{ control_disabled: !vm.canGotoPrevWeek }">
+                        <span class="icon_rightArr"></span>
+                    </a>
+                    <div class="period">
+                        {{ vm.currentWeekDates[0].label }}, {{vm.currentWeekDates[0].year}} - {{
+                        vm.currentWeekDates[6].label }}, {{ vm.currentWeekDates[6].year }}
+                    </div>
+                    <a class="btn-next" href ng-click="vm.gotoNextWeek()"
+                       ng-class="{ control_disabled: !vm.canGotoNextWeek }">
+                        <span class="icon_rightArr"></span>
+                    </a>
+                </div>
+
+            </div>
+
+            <table class="table-desk">
+                <tbody>
+                <tr>
+
+                    <th>
+                        <div class="cell">
+                            {{ 'web.searchScheduleResult.flight' | aliasStatic}}
+                        </div>
+                    </th>
+                    <th>
+                        <div class="cell">
+                            {{ 'web.searchScheduleResult.time' | aliasStatic}}
+                        </div>
+                    </th>
+                    <th>
+                        <div class="cell">
+                            {{ 'web.searchScheduleResult.flightTime' | aliasStatic}}
+                        </div>
+                    </th>
+                    <th class=" cell-air">
+                        <div class="cell">
+                            {{ 'web.searchScheduleResult.airplane' | aliasStatic}}
+                        </div>
+                    </th>
+                    <th class=" cell-class">
+                        <div class="cell">
+                            {{ 'web.searchScheduleResult.flightClass' | aliasStatic}}
+                        </div>
+                    </th>
+
+                    <th ng-repeat="(weekDayNum, weekDay) in vm.weekDaysList"
+                        class="cell-date date-{{ weekDay.code }}"
+                        ng-mouseover="vm.hoverDay = weekDay.code"
+                        ng-class="{ hover: weekDay.code == vm.hoverDay }">
+    						<span class="cell">
+    							{{ vm.currentWeekDates[weekDayNum].label }}
+    						</span>
+                    </th>
+
+                </tr>
+                </tbody>
+
+
+                <div ng-repeat="(scheduleRowNum, scheduleRow) in vm.scheduleFlights">
+
+                    <div ng-repeat="(flightNum, flight) in scheduleRow.flights"
+                         ng-class="{ 'no-border': scheduleRow.flights.length > 1 && flightNum < (scheduleRow.flights.length-1) }">
+                        <!--<div ng-repeat="(weekDayNum, currentWeekDate) in vm.currentWeekDates">-->
+                        <!--<p>weekDayNum: {{ weekDayNum }}</p>-->
+                        <!--<p>currentWeekDate: {{ currentWeekDate }}</p>-->
+                        <!--<p>available: {{ vm.checkActiveFlightDay(flight.days, weekDayNum, currentWeekDate.date,-->
+                        <!--flight.begin_date, flight.end_date)}}-->
+                        <!--</p>-->
+                        <!--</div>-->
+                    </div>
+                    {{ scheduleRow.flights | availabilityArray:vm.currentWeekDates }}
+                </div>
+
+                <tbody ng-repeat="(scheduleRowNum, scheduleRow) in vm.scheduleFlights">
+
+                <tr ng-repeat-start="(flightNum, flight) in scheduleRow.flights"
+                    ng-class="{ 'no-border': scheduleRow.flights.length > 1 && flightNum < (scheduleRow.flights.length-1) }">
+
+                    <td>
+                        <a href fancybox="popupFlightDetail" ng-click="vm.flightDetail = scheduleRow" class="cell link">{{
+                            flight.company.code }} {{ flight.racenumber }}</a>
+                    </td>
+                    <td>
+                        <div class="cell">
+                            {{ flight.departuretime }}
+                            <wrap ng-if="flight.departuredayshift">
+                                {{ " " }}
+                                <div class="increase">{{ flight.departuredayshift | dayshift }}</div>
+                            </wrap>
+                            {{ " – " }}
+                            {{ flight.arrivaltime }}
+                            <wrap ng-if="flight.arrivaldayshift">
+                                {{ " " }}
+                                <div class="increase">{{ flight.arrivaldayshift | dayshift }}</div>
+                            </wrap>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="cell">{{ flight.flightTime | timeAsWords }}</div>
+                    </td>
+                    <td class="cell-air">
+                        <div class="cell">{{ flight.airplane }}</div>
+                    </td>
+                    <td class="cell-class">
+                        <div class="cell">
+                            <wrap ng-repeat="(num, flightClass) in flight.classes">
+                                <wrap ng-if="num">{{ ', ' }}</wrap>
+                                {{ 'web.avia.class.' | aliasWithPrefix:flightClass }}
+                            </wrap>
+                        </div>
+                    </td>
+
+                    <td ng-if="flightNum == 0"
+                        ng-repeat="(weekDayNum, currentWeekDate) in vm.currentWeekDates"
+                        ng-mouseover="vm.hoverDay = vm.weekDaysList[weekDayNum].code"
+                        ng-init="activeFlightDay = vm.checkActiveFlightDay(flight.days, weekDayNum, currentWeekDate.date, flight.begin_date, flight.end_date); isPastDate=vm.checkIsDateInPast(currentWeekDate.date);"
+                        class="cell-date date-{{ vm.weekDaysList[weekDayNum].code }}"
+                        rowspan="{{ (scheduleRow.flights.length > 1) ? (scheduleRow.flights.length*2-1) : 1 }}"
+                        ng-class="{ null:!activeFlightDay, active: (scheduleRowNum == vm.selectedScheduleRowNum && currentWeekDate.date == vm.selectedDate) }">
+
+                        <wrap ng-if="activeFlightDay">
+                            <a href ng-if="!isPastDate"
+                               ng-click="vm.selectFlightDate(scheduleRowNum, currentWeekDate.date)" class="cell">
+                                {{ vm.weekDaysList[weekDayNum].name }}
+                            </a>
+                            <span ng-if="isPastDate" class="cell control_disabled">
+										{{ vm.weekDaysList[weekDayNum].name }}
+									</span>
+                        </wrap>
+
+
+                    </td>
+
+                </tr>
+
+                <tr ng-repeat-end ng-if="scheduleRow.connections[flightNum]"
+                    ng-init="connection=scheduleRow.connections[flightNum]" class="no-border">
+
+                    <td colspan="2">
+                        <div class="cell">
+                            <wrap ng-if="scheduleRow.flights[flightNum].racenumber != scheduleRow.flights[flightNum+1].racenumber">
+                                {{ 'web.searchScheduleResult.connection' | aliasStatic}}
+                            </wrap>
+                            <wrap ng-if="scheduleRow.flights[flightNum].racenumber == scheduleRow.flights[flightNum+1].racenumber">
+                                {{ 'web.searchScheduleResult.landing' | aliasStatic}}
+                            </wrap>
+                            {{ ' ' }} {{ connection.cityName }} ({{ connection.city }})
+                        </div>
+                    </td>
+                    <td>
+                        <div class="cell">
+                            {{ connection.time | timeAsWords }}
+                        </div>
+                    </td>
+                    <td class="cell-air"></td>
+                    <td class=" cell-class"></td>
+
+                </tr>
+
+                </tbody>
+
+
+            </table>
+
+
+            <table class="table-mob" ng-repeat="(scheduleRowNum, scheduleRow) in vm.scheduleFlights"
+                   ng-class="{ 'multi-line': (scheduleRow.flights.length > 1) }">
+                <tbody ng-repeat="(flightNum, flight) in scheduleRow.flights">
+
+                <tr>
+                    <th colspan="2">
+                        <a href fancybox="popupFlightDetail" ng-click="vm.flightDetail = scheduleRow" class="cell link">{{
+                            flight.company.code }} {{ flight.racenumber }}</a>
+                    </th>
+                    <th colspan="3" class="cell-time">
+                        <div class="cell">
+                            <b>
+                                {{ flight.departuretime }}
+                                <wrap ng-if="flight.departuredayshift">
+                                    {{ " " }}
+                                    <div class="increase">{{ flight.departuredayshift | dayshift }}</div>
+                                </wrap>
+                                {{ " – " }}
+                                {{ flight.arrivaltime }}
+                                <wrap ng-if="flight.arrivaldayshift">
+                                    {{ " " }}
+                                    <div class="increase">{{ flight.arrivaldayshift | dayshift }}</div>
+                                </wrap>
+                            </b>
+                        </div>
+                    </th>
+                    <th colspan="2">
+                        <div class="cell">{{ flight.flightTime | timeAsWords }}</div>
+                    </th>
+                </tr>
+                <tr ng-if="scheduleRow.connections[flightNum]" ng-init="connection=scheduleRow.connections[flightNum]">
+
+                    <th colspan="5">
+                        <div class="cell">
+                            <wrap ng-if="scheduleRow.flights[flightNum].racenumber != scheduleRow.flights[flightNum+1].racenumber">
+                                {{ 'web.searchScheduleResult.connection' | aliasStatic}}
+                            </wrap>
+                            <wrap ng-if="scheduleRow.flights[flightNum].racenumber == scheduleRow.flights[flightNum+1].racenumber">
+                                {{ 'web.searchScheduleResult.landing' | aliasStatic}}
+                            </wrap>
+                            {{ ' ' }} {{ connection.cityName }} ({{ connection.city }})
+                        </div>
+                    </th>
+                    <th colspan="2">
+                        <div class="cell">
+                            {{ connection.time | timeAsWords }}
+                        </div>
+                    </th>
+                </tr>
+                <tr ng-if="flightNum == scheduleRow.flights.length - 1">
+                    <td ng-repeat="(weekDayNum, currentWeekDate) in vm.currentWeekDates"
+                        ng-mouseover="vm.hoverDay = vm.weekDaysList[weekDayNum].code"
+                        ng-init="activeFlightDay = vm.checkActiveFlightDay(flight.days, weekDayNum, currentWeekDate.date, flight.begin_date, flight.end_date); isPastDate=vm.checkIsDateInPast(currentWeekDate.date);"
+                        class="cell-date date-{{ vm.weekDaysList[weekDayNum].code }}"
+                        rowspan="{{ (scheduleRow.flights.length > 1) ? (scheduleRow.flights.length*2-1) : 1 }}"
+                        ng-class="{ null:!activeFlightDay, active: (scheduleRowNum == vm.selectedScheduleRowNum && currentWeekDate.date == vm.selectedDate) }">
+
+                        <wrap ng-if="activeFlightDay">
+                            <a href ng-if="!isPastDate"
+                               ng-click="vm.selectFlightDate(scheduleRowNum, currentWeekDate.date)" class="cell">
+                                {{ vm.weekDaysList[weekDayNum].name }}
+                            </a>
+                            <span ng-if="isPastDate" class="cell control_disabled">
+									{{ vm.weekDaysList[weekDayNum].name }}
+								</span>
+                        </wrap>
+
+
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<popup-flight-detail detail="vm.flightDetail"></popup-flight-detail>
