@@ -72,6 +72,7 @@
                         ng-class="{ hover: weekDay.code == vm.hoverDay }">
     						<span class="cell">
     							{{ vm.currentWeekDates[weekDayNum].label }}
+                                {{ vm.weekDaysList[weekDayNum].name }}
     						</span>
                     </th>
 
@@ -130,10 +131,10 @@
                         <wrap ng-if="activeFlightDay">
                             <a href ng-if="!isPastDate"
                                ng-click="vm.selectFlightDate(scheduleRowNum, currentWeekDate.date)" class="cell">
-                                {{ vm.weekDaysList[weekDayNum].name }}
+                                <i class="icon icon_plane-up"></i>
                             </a>
                             <span ng-if="isPastDate" class="cell control_disabled">
-										{{ vm.weekDaysList[weekDayNum].name }}
+                                <i class="icon icon_plane-up icon_plane-up_gray"></i>
 									</span>
                         </wrap>
 
