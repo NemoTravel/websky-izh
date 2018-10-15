@@ -51,6 +51,10 @@ function hideNotAvailableFlightsController($scope, utils) {
                 return item;
             }).length;
 
+            segment.isAvailableAtThisWeek = !!segment.flights.filter(function (flight) {
+                return flight.isAvailableAtThisWeek;
+            }).length;
+
         });
     }
 

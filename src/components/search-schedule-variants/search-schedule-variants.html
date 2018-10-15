@@ -80,11 +80,11 @@
                 </tbody>
 
 
-                <tbody ng-repeat="(scheduleRowNum, scheduleRow) in vm.scheduleFlights">
+                <tbody ng-repeat="(scheduleRowNum, scheduleRow) in vm.scheduleFlights" ng-if="scheduleRow.isAvailableAtThisWeek">
 
                 <tr ng-repeat-start="(flightNum, flight) in scheduleRow.flights"
                     ng-class="{ 'no-border': scheduleRow.flights.length > 1 && flightNum < (scheduleRow.flights.length-1) }"
-                    ng-if="flight.isAvailableAtThisWeek">
+                    >
 
                     <td>
                         <a href fancybox="popupFlightDetail" ng-click="vm.flightDetail = scheduleRow" class="cell link">{{
@@ -174,8 +174,9 @@
 
 
             <table class="table-mob" ng-repeat="(scheduleRowNum, scheduleRow) in vm.scheduleFlights"
+                   ng-if="scheduleRow.isAvailableAtThisWeek"
                    ng-class="{ 'multi-line': (scheduleRow.flights.length > 1) }">
-                <tbody ng-if="flight.isAvailableAtThisWeek" ng-repeat="(flightNum, flight) in scheduleRow.flights">
+                <tbody ng-repeat="(flightNum, flight) in scheduleRow.flights">
                 <tr>
                     <th colspan="2">
                         <a href fancybox="popupFlightDetail" ng-click="vm.flightDetail = scheduleRow" class="cell link">{{
