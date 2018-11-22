@@ -156,7 +156,7 @@
                                           brand-available-props="segment.flights[0].brandAvailableProps"
                                           brand-paid-props="segment.flights[0].brandPaidProps"
                                           brand-unavailable-props="segment.flights[0].brandUnavailableProps">
-                          <brand-props-info>
+                          </brand-props-info>
 
                       </div>
                     </div>
@@ -331,6 +331,36 @@
                         <p ng-if="rec.amount" ng-bind-html="{ value: rec.amount, currency: rec.currency } | price"></p>
                       </td>
                     </tr>
+
+
+
+                    <tr ng-if=" ('customer.showIsSmsSend' | param) || ('customer.showIsEmailSend' | param) ">
+                      <td>
+                        <div class="inp" ng-if=" 'customer.showIsSmsSend' | param ">
+                          <div class="customCheckbox">
+                            <label>
+                              <input type="checkbox" ng-model="vm.customer.sendSms">
+                              <span></span>
+                              {{ 'web.customerInfo.sendSms' | aliasStatic}}
+                            </label>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="inp" ng-if=" 'customer.showIsEmailSend' | param ">
+                          <div class="customCheckbox">
+                            <label>
+                              <input type="checkbox" ng-model="vm.customer.sendEMail">
+                              <span></span>
+                              {{ 'web.customerInfo.sendEMail' | aliasStatic}}
+                            </label>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+
+
+
                     </tbody>
                   </table>
 
